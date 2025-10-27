@@ -16,7 +16,6 @@ body{
 
 * { box-sizing: border-box; }
 
-
 .board {
   inline-size: min(90vmin, 520px);
   aspect-ratio: 1 / 1;
@@ -40,5 +39,5 @@ body{
 }
 
 .cell:hover{
-    background-color: white;
+    background-color: rgb(127, 127, 127);
 }
