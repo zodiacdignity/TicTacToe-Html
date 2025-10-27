@@ -1,0 +1,44 @@
+body{
+    background-color: rgb(35, 34, 34);
+    height: 100dvh;          
+    margin: 0;
+    place-items: center;
+    display: grid;
+}
+
+.main-content{
+  width: min(100%, var(--content-max));
+  padding: clamp(16px, 2vw, 32px);
+  border-radius: 16px;
+  background: #14181d;
+  
+}
+
+* { box-sizing: border-box; }
+
+
+.board {
+  inline-size: min(90vmin, 520px);
+  aspect-ratio: 1 / 1;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  background: #222;
+  padding: 6px;
+  border-radius: 12px;
+}
+
+.cell {
+  aspect-ratio: 1 / 1;
+  background: #111;
+  border: 0;
+  border-radius: 8px;
+  font-size: clamp(24px, 10vmin, 72px); 
+  color: #f2f2f2;
+  cursor: pointer;
+}
+
+.cell:hover{
+    background-color: white;
+}
