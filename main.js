@@ -1,6 +1,7 @@
 const tiles = document.querySelectorAll(".cell");
 let playerTurn = 1;
 let board = Array(9).fill(null);
+let gameOver = false;
 
 const WINS = [
   [0,1,2],[3,4,5],[6,7,8],
@@ -17,16 +18,17 @@ function winner(b) {
 
 tiles.forEach((el, i) => {
   el.addEventListener("click", () => {
-    if (board[i]) return;     
+    if (gameOver || board[i]) return;
 
     const mark = playerTurn === 1 ? "X" : "O";
-    board[i] = mark;  
+    board[i] = mark;
     el.textContent = mark;
 
     const w = winner(board);
-    if (w) { console.log(`${w} wins`); return; }
-    if (board.every(Boolean)) { console.log("Draw"); return; }
+    if (w) { console.log(`${w} wins`); gameOver = true; return; }
 
-    playerTurn = 3 - playerTurn;    
+    if (board.every(Boolean)) { console.log("Draw"); gameOver = true; return; }
+
+    playerTurn = 3 - playerTurn;
   });
 });
