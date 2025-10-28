@@ -1,23 +1,32 @@
-let tiles = document.querySelectorAll(".cell")
-let playerTurn = 1
-
-tiles.forEach((el, i) => el.dataset.index = i)
-
+const tiles = document.querySelectorAll(".cell");
+let playerTurn = 1;
 let board = Array(9).fill(null);
 
-tiles.forEach((element, i) =>{
-    element.addEventListener("click", () => {   
-        if (playerTurn == 1){
-            playerTurn = 2
-            element.innerHTML = 'X';
-            i = "X"
-            board[i] = "X"
-           console.log(board[i])
-        } else {
-            playerTurn = 1
-            element.innerHTML = 'O';
-            board[i] = "O"
-            console.log(board[i])
-        }
-    })
-})
+const WINS = [
+  [0,1,2],[3,4,5],[6,7,8],
+  [0,3,6],[1,4,7],[2,5,8],
+  [0,4,8],[2,4,6]
+];
+
+function winner(b) {
+  for (const [a, c, d] of WINS) {
+    if (b[a] && b[a] === b[c] && b[a] === b[d]) return b[a];
+  }
+  return null;
+}
+
+tiles.forEach((el, i) => {
+  el.addEventListener("click", () => {
+    if (board[i]) return;     
+
+    const mark = playerTurn === 1 ? "X" : "O";
+    board[i] = mark;  
+    el.textContent = mark;
+
+    const w = winner(board);
+    if (w) { console.log(`${w} wins`); return; }
+    if (board.every(Boolean)) { console.log("Draw"); return; }
+
+    playerTurn = 3 - playerTurn;    
+  });
+});
